@@ -56,22 +56,26 @@ describe('ООП', () => {
     });
 
     describe('#Queue', () => {
-        it('проверка массивом', () => {
-            const queue = new core.Queue();
-            // TODO:
-            assert.strictEqual(true, true);
-        });
-
-        it('проверка на пограничные случаи', () => {
-            const queue = new core.Queue();
-            // TODO:
-            assert.strictEqual(true, true);
-        });
-
         it('может создаться из массива', () => {
-            const queue = new core.Queue([1,2,3,5]);
-            // TODO:
-            assert.strictEqual(true, true);
+            const queue = new core.Queue([1, 2, 3, 5]);
+
+            assert.strictEqual(!!queue, true);
+        });
+        it('может создаться без аргументов', () => {
+            const queue = new core.Queue();
+
+            assert.strictEqual(!!queue, true);
+        });
+        it('метод pop работает', () => {
+            const queue = new core.Queue([1, 2, 3, 4, 5, 6]);
+
+            assert.strictEqual((queue.pop() === 1) && (JSON.stringify(queue.getArray()) === JSON.stringify([2, 3, 4, 5, 6])), true);
+        });
+        it('метод push работает', () => {
+            const queue = new core.Queue([1, 2, 3, 4, 5]);
+            queue.pushBack(6);
+
+            assert.strictEqual((JSON.stringify(queue.getArray()) === JSON.stringify([1, 2, 3, 4, 5, 6])), true);
         });
     });
 });
