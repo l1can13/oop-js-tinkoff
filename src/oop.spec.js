@@ -1,6 +1,5 @@
 const assert = require('assert');
 const core = require('./oop');
-const {Point3D} = require("./oop");
 
 describe('ООП', () => {
     describe('#Point', () => {
@@ -47,31 +46,35 @@ describe('ООП', () => {
             const pointA = new core.Point3D(1, 2, -3);
             const pointB = new core.Point3D(1, -1, 1);
 
-            assert.strictEqual(typeof Point3D.vectorLength, 'function');
+            assert.strictEqual(typeof core.Point3D.vectorLength, 'function');
 
-            const length = Point3D.vectorLength(pointA, pointB);
+            const length = core.Point3D.vectorLength(pointA, pointB);
 
             assert.strictEqual(length, 5);
         });
     });
 
     describe('#Queue', () => {
-        it('проверка массивом', () => {
-            const queue = new core.Queue();
-            // TODO:
-            assert.strictEqual(true, true);
-        });
-
-        it('проверка на пограничные случаи', () => {
-            const queue = new core.Queue();
-            // TODO:
-            assert.strictEqual(true, true);
-        });
-
         it('может создаться из массива', () => {
-            const queue = new core.Queue([1,2,3,5]);
-            // TODO:
-            assert.strictEqual(true, true);
+            const queue = new core.Queue([1, 2, 3, 5]);
+
+            assert.strictEqual(queue instanceof core.Queue, true);
+        });
+        it('может создаться без аргументов', () => {
+            const queue = new core.Queue();
+
+            assert.strictEqual(queue instanceof core.Queue, true);
+        });
+        it('метод pop работает', () => {
+            const queue = new core.Queue([1, 2, 3, 4, 5, 6]);
+
+            assert.strictEqual((queue.pop() === 1) && (JSON.stringify(queue.que) === JSON.stringify([2, 3, 4, 5, 6])), true);
+        });
+        it('метод push работает', () => {
+            const queue = new core.Queue([1, 2, 3, 4, 5]);
+            queue.pushBack(6);
+
+            assert.strictEqual((JSON.stringify(queue.que) === JSON.stringify([1, 2, 3, 4, 5, 6])), true);
         });
     });
 });
