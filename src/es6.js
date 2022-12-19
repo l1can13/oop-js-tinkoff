@@ -41,32 +41,21 @@ function calculateSalaryDifference(array) {
 // Словарь - (string, string), и все это не null и не undefined
 // * покройте класс тестами
 class Dictionary {
-    dict = new Map();
 
     constructor(word, definition) {
-        if (typeof word == 'string' && typeof definition == 'string' && typeof word != 'undefined' && typeof definition != 'undefined')
-            this.dict.set(word, definition);
-        else if (!arguments.length) {
+        this.dict = new Map();
 
-        }
-        else {
-            return new Error('Неверный тип данных!');
+        if (typeof word === 'string' && typeof definition === 'string') {
+            this.dict.set(word, definition);
         }
     }
 
     get(word) {
-        if (this.dict.has(word) && typeof word == 'string' && typeof word != 'undefined')
-            return this.dict.get(word);
-        else if (typeof word != 'string') {
-            console.log('Неверный тип данных!');
-        }
-        else {
-            console.log('Слово не найдено!');
-        }
+        return this.dict.get(word);
     }
 
     set(word, definition) {
-        if (typeof word == 'string' && typeof definition == 'string' && typeof word != 'undefined' && typeof definition != 'undefined')
+        if (typeof word === 'string' && typeof definition === 'string')
             this.dict.set(word, definition);
         else {
             throw new Error('Неверные типы данных!');
@@ -74,11 +63,7 @@ class Dictionary {
     }
 
     remove(word) {
-        if (this.dict.has(word))
-            this.dict.delete(word);
-        else {
-            console.log('Слово не найдено!');
-        }
+        this.dict.delete(word);
     }
 
     pop(word) {
@@ -92,18 +77,14 @@ class Dictionary {
         }
     }
 
-    getDict() {
-        return this.dict;
-    }
-
-    isEqual(d) {
+    static isEqual(d1, d2) {
         let testVal;
-        if (this.dict.size !== d.getDict().size) {
+        if (d1.dict.size !== d2.dict.size) {
             return false;
         }
-        for (let [key, val] of this.dict) {
-            testVal = d.get(key);
-            if (testVal !== val || (testVal === undefined && !d.has(key))) {
+        for (let [key, val] of d1.dict) {
+            testVal = d2.get(key);
+            if (testVal !== val || (testVal === undefined && !d2.has(key))) {
                 return false;
             }
         }
@@ -114,15 +95,6 @@ class Dictionary {
         console.log(this.dict);
     }
 }
-
-let dictionary = new Dictionary('1', '1');
-dictionary.set('2', '2');
-console.log(dictionary);
-dictionary.remove('1');
-let d = new Dictionary('2', '2');
-console.log(dictionary, d);
-
-console.log(dictionary.isEqual(d));
 
 module.exports = {
     fioToName,

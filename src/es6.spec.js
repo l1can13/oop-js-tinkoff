@@ -1,6 +1,5 @@
 const assert = require('assert');
 const core = require('./es6');
-const {Dictionary} = require("./es6");
 
 describe('es6', () => {
     describe('#fioToName', () => {
@@ -41,7 +40,7 @@ describe('es6', () => {
         it('экземпляр класса создается', () => {
             const empty = new core.Dictionary();
 
-            assert.strictEqual(!!empty, true);
+            assert.strictEqual(empty instanceof core.Dictionary, true);
         });
         it('обрабатываются неверные данные', () => {
             const intWord = new core.Dictionary(1, '1');
@@ -56,22 +55,22 @@ describe('es6', () => {
             const undefinedDef = new core.Dictionary('1', undefined);
             const undefinedBoth = new core.Dictionary(undefined, undefined);
 
-            assert.strictEqual(isNaN(intWord), true);
-            assert.strictEqual(isNaN(intDef), true);
-            assert.strictEqual(isNaN(intBoth), true);
+            assert.strictEqual(core.Dictionary.isEqual(new core.Dictionary(), intWord), true);
+            assert.strictEqual(core.Dictionary.isEqual(new core.Dictionary(), intDef), true);
+            assert.strictEqual(core.Dictionary.isEqual(new core.Dictionary(), intBoth), true);
 
-            assert.strictEqual(isNaN(nullWord), true);
-            assert.strictEqual(isNaN(nullDef), true);
-            assert.strictEqual(isNaN(nullBoth), true);
+            assert.strictEqual(core.Dictionary.isEqual(new core.Dictionary(), nullWord), true);
+            assert.strictEqual(core.Dictionary.isEqual(new core.Dictionary(), nullDef), true);
+            assert.strictEqual(core.Dictionary.isEqual(new core.Dictionary(), nullBoth), true);
 
-            assert.strictEqual(isNaN(undefinedWord), true);
-            assert.strictEqual(isNaN(undefinedDef), true);
-            assert.strictEqual(isNaN(undefinedBoth), true);
+            assert.strictEqual(core.Dictionary.isEqual(new core.Dictionary(), undefinedWord), true);
+            assert.strictEqual(core.Dictionary.isEqual(new core.Dictionary(), undefinedDef), true);
+            assert.strictEqual(core.Dictionary.isEqual(new core.Dictionary(), undefinedBoth), true);
         });
         it('обрабатываются верные данные', () => {
             const okDict = new core.Dictionary('1', '1');
 
-            assert.strictEqual(!!okDict, true);
+            assert.strictEqual(okDict instanceof core.Dictionary, true);
         });
         it('правильно работает метод get', () => {
             const dictionary = new core.Dictionary('1', '1');
@@ -89,14 +88,14 @@ describe('es6', () => {
             dictionary.set('2', '2');
             dictionary.remove('1');
 
-            assert.strictEqual(dictionary.isEqual(new Dictionary('2', '2')), true);
+            assert.strictEqual(core.Dictionary.isEqual(dictionary, new core.Dictionary('2', '2')), true);
         });
         it('правильно работает метод pop', () => {
             const dictionary = new core.Dictionary('1', '1');
             dictionary.set('2', '2');
             let one = dictionary.pop('1');
 
-            assert.strictEqual((one === '1') && (dictionary.isEqual(new Dictionary('2', '2'))), true);
+            assert.strictEqual((one === '1') && (core.Dictionary.isEqual(dictionary, new core.Dictionary('2', '2'))), true);
         });
     });
 });

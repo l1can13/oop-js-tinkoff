@@ -4,15 +4,9 @@
  * Со звездочкой: реализовать метод, который возвращает расстояние от точки до центра координат (0, 0)
  */
 class Point {
-    constructor(x, y = 0) {
-        if (arguments.length === 0) {
-            this.x = 0;
-            this.y = 0;
-        }
-        else {
-            this.x = x;
-            this.y = y;
-        }
+    constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
     }
 
     length() {
@@ -52,6 +46,7 @@ class Point3D extends Point {
 class Queue {
     constructor(arr) {
         this.que = [];
+
         if (arguments.length === 0) {
             return
         }
@@ -62,10 +57,6 @@ class Queue {
 
     show() {
         console.log(this.que);
-    }
-
-    getArray() {
-        return this.que;
     }
 
     pushBack(elem) {
